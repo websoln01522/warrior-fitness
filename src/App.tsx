@@ -401,9 +401,9 @@ const Schedule = () => {
 
 const Transformations = () => {
   const stories = [
-    { label: "Strength", value: "Muscle Tone", time: "3 Months", image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=600&auto=format&fit=crop" },
-    { label: "Wellness", value: "Weight Loss", time: "5 Months", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=600&auto=format&fit=crop" },
-    { label: "Endurance", value: "Stamina", time: "4 Months", image: "https://images.unsplash.com/photo-1549576490-b0b4831da60a?q=80&w=600&auto=format&fit=crop" }
+    { label: "Transformation", value: "-12kg Weight Loss", time: "3 Months", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=600&auto=format&fit=crop" },
+    { label: "Strength", value: "Muscle Toning", time: "5 Months", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=600&auto=format&fit=crop" },
+    { label: "Consistency", value: "Endurance Boost", time: "4 Months", image: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=600&auto=format&fit=crop" }
   ];
 
   return (
@@ -488,10 +488,10 @@ const Testimonials = () => {
 
 const Gallery = () => {
   const images = [
-    "https://images.unsplash.com/photo-1518611012118-2969c63b002f?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1596715949111-0fa36d140645?q=80&w=800&auto=format&fit=crop"
+    "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=800&auto=format&fit=crop"
   ];
 
   return (
