@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "Space Grotesk", sans-serif;
-  --color-neon-red: #FF0000;
-  --color-charcoal: #121212;
-  --color-matte-black: #0A0A0A;
+  --font-heading: "Plus Jakarta Sans", sans-serif;
+  --color-brand-blue: #0ea5e9;
+  --color-brand-teal: #0d9488;
+  --color-brand-navy: #0f172a;
+  --color-soft-bg: #f8fafc;
 }
 
 @layer base {
   body {
-    @apply bg-matte-black text-white font-sans antialiased;
+    @apply bg-white text-brand-navy font-sans antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -20,35 +21,34 @@
 }
 
 @layer utilities {
-  .neon-glow {
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-  }
-
-  .neon-text-glow {
-    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-  }
-
-  .gradient-mask-b {
-    mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+  .text-glow-blue {
+    text-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
+    @apply bg-white/80 backdrop-blur-md border border-slate-200 shadow-xl shadow-slate-200/50;
   }
 
   .btn-premium {
-    @apply relative overflow-hidden transition-all duration-300 px-8 py-4 rounded-full font-bold uppercase tracking-wider text-sm;
+    @apply relative overflow-hidden transition-all duration-300 px-8 py-3 rounded-full font-semibold tracking-wide text-sm inline-flex items-center justify-center gap-2;
   }
 
   .btn-primary {
-    @apply bg-neon-red text-white hover:bg-red-700;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    @apply bg-brand-blue text-white hover:bg-sky-600 shadow-lg shadow-sky-200;
   }
 
   .btn-secondary {
-    @apply border border-white/20 text-white hover:bg-white hover:text-black;
+    @apply bg-white text-brand-navy border border-slate-200 hover:bg-slate-50 shadow-sm;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-navy mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-brand-blue font-bold uppercase tracking-[0.2em] text-xs mb-3 block;
   }
 }
 
@@ -57,8 +57,8 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-matte-black;
+  @apply bg-slate-50;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white/10 rounded-full hover:bg-white/20;
+  @apply bg-brand-blue/20 rounded-full hover:bg-brand-blue/40;
 }

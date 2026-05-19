@@ -1,23 +1,29 @@
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { 
-  Instagram, 
-  MapPin, 
   Phone, 
   MessageCircle, 
   CheckCircle2, 
   Star, 
-  Dumbbell, 
-  Zap, 
-  ShieldCheck, 
   Clock, 
-  ArrowRight,
-  Menu,
+  MapPin, 
+  Calendar, 
+  Heart, 
+  ShieldCheck, 
+  Award, 
+  Users, 
+  ChevronRight, 
+  Menu, 
   X,
+  Stethoscope,
+  Sparkles,
+  Baby,
+  Smile,
+  Instagram,
   Facebook,
   Twitter,
-  ChevronRight
+  ArrowRight
 } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // --- Components ---
 
@@ -33,23 +39,27 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "About", href: "#about" },
-    { name: "Features", href: "#features" },
-    { name: "Memberships", href: "#membership" },
-    { name: "Transformations", href: "#transformations" },
-    { name: "Trainers", href: "#trainers" },
-    { name: "Contact", href: "#contact" },
+    { name: "Services", href: "#services" },
+    { name: "Why Us", href: "#why-choose-us" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "Reviews", href: "#reviews" },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-matte-black/90 backdrop-blur-xl border-b border-white/10 py-3" : "bg-transparent py-5"}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/90 backdrop-blur-xl border-b border-slate-100 py-3 shadow-sm" : "bg-transparent py-5"}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-neon-red rounded-sm flex items-center justify-center rotate-45">
-            <Dumbbell className="text-white w-6 h-6 -rotate-45" />
+          <div className="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center shadow-lg shadow-sky-200">
+            <Heart className="text-white w-6 h-6 fill-white/20" />
           </div>
-          <span className="font-heading font-black text-2xl tracking-tighter uppercase italic">
-            Warrior <span className="text-neon-red">Fitness</span>
-          </span>
+          <div className="flex flex-col">
+            <span className="font-heading font-extrabold text-xl leading-none text-brand-navy">
+              Affection
+            </span>
+            <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-brand-blue leading-none mt-1">
+              Dental Care
+            </span>
+          </div>
         </div>
 
         {/* Desktop Nav */}
@@ -58,319 +68,261 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-sm font-medium hover:text-neon-red transition-colors uppercase tracking-widest"
+              className="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors"
             >
               {link.name}
             </a>
           ))}
-          <a href="#membership" className="btn-premium btn-primary py-2 px-6">
-            Join Now
+          <a href="#contact" className="btn-premium btn-primary py-2 px-6">
+            Book Appointment
           </a>
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <button className="md:hidden text-brand-navy" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute top-full left-0 w-full bg-matte-black border-b border-white/10 py-10 px-6 flex flex-col items-center gap-6 md:hidden"
-        >
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-lg font-bold hover:text-neon-red transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
-          <a href="#membership" className="btn-premium btn-primary w-full text-center" onClick={() => setIsMobileMenuOpen(false)}>
-            Join Now
-          </a>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-white border-b border-slate-100 overflow-hidden shadow-xl"
+          >
+            <div className="p-6 flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <a 
+                  key={link.name} 
+                  href={link.href} 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg font-bold text-slate-700 hover:text-brand-blue"
+                >
+                  {link.name}
+                </a>
+              ))}
+              <a href="#contact" className="btn-premium btn-primary w-full" onClick={() => setIsMobileMenuOpen(false)}>
+                Book Appointment
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
 
 const Hero = () => {
-  const scrollRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ["start start", "end start"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
   return (
-    <section id="hero" ref={scrollRef} className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with Parallax */}
-      <motion.div 
-        style={{ y }}
-        className="absolute inset-0 z-0"
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-matte-black via-matte-black/40 to-transparent z-10" />
-        <div className="absolute inset-0 bg-black/40 z-10" />
-        <img 
-          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1920&auto=format&fit=crop" 
-          alt="Warrior Athlete" 
-          className="w-full h-full object-cover"
-          referrerPolicy="no-referrer"
-        />
-      </motion.div>
-
-      {/* Content */}
-      <motion.div 
-        style={{ opacity }}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
-        className="relative z-20 text-center px-6 max-w-4xl"
-      >
-        <motion.span 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden bg-slate-50">
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-sky-100/50 -skew-x-12 translate-x-1/4 -z-10" />
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="inline-block py-1 px-4 bg-neon-red/10 border border-neon-red/30 rounded-full text-neon-red text-xs font-bold tracking-[0.3em] uppercase mb-6"
         >
-          Unleash Your Inner Power
-        </motion.span>
-        <h1 className="text-6xl md:text-8xl font-black uppercase italic leading-[0.9] mb-6">
-          Train Like A <span className="text-neon-red neon-text-glow">Warrior</span>
-        </h1>
-        <p className="text-lg md:text-xl text-white/60 mb-10 max-w-2xl mx-auto font-light tracking-wide">
-          Elite Equipment • Expert Trainers • Real Results. Vadodara's fast-growing premium fitness destination.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#contact" className="btn-premium btn-primary w-full sm:w-auto">
-            Start Free Trial
-          </a>
-          <a href="#membership" className="btn-premium btn-secondary w-full sm:w-auto flex items-center justify-center gap-2">
-            View Plans <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-      </motion.div>
+          <span className="section-subtitle">Premium Oral Healthcare</span>
+          <h1 className="text-5xl lg:text-7xl font-extrabold text-brand-navy leading-[1.1] mb-6">
+            Your Smile Deserves <span className="text-brand-blue">Expert Care</span>
+          </h1>
+          <p className="text-lg text-slate-600 mb-10 max-w-lg leading-relaxed">
+            Experience advanced dental treatments with a gentle touch. At Affection Dental Care, we combine technology with comfort for your perfect smile.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a href="#contact" className="btn-premium btn-primary">
+              Book Appointment <Calendar className="w-4 h-4 ml-1" />
+            </a>
+            <a href="tel:+919687056003" className="btn-premium btn-secondary">
+              <Phone className="w-4 h-4 mr-1 text-brand-blue" /> +91 96870 56003
+            </a>
+          </div>
+          
+          <div className="mt-12 flex items-center gap-6">
+            <div className="flex -space-x-3">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200">
+                  <img 
+                    src={`https://i.pravatar.cc/100?img=${i + 10}`} 
+                    alt="Patient" 
+                    className="w-full h-full rounded-full"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              ))}
+            </div>
+            <div>
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-orange-400 fill-orange-400" />)}
+                <span className="font-bold text-brand-navy ml-1">4.8</span>
+              </div>
+              <p className="text-xs text-slate-500 uppercase tracking-widest font-semibold">1,000+ Happy Patients</p>
+            </div>
+          </div>
+        </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div 
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
-      >
-        <div className="w-[1px] h-12 bg-gradient-to-b from-white/0 via-white/50 to-white/0" />
-        <span className="text-[10px] uppercase tracking-widest text-white/40">Scroll</span>
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, x: 50 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 1 }}
+          className="relative"
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-sky-200/30 rounded-full blur-3xl -z-10" />
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-sky-100 border-8 border-white">
+            <img 
+              src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200&auto=format&fit=crop" 
+              alt="Dental Care" 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute bottom-6 left-6 right-6">
+              <div className="glass-card p-4 rounded-2xl flex items-center gap-4">
+                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-brand-navy">Safety Guaranteed</h4>
+                  <p className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">ISO Certified Clinic</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };
 
 const About = () => {
   return (
-    <section id="about" className="py-24 px-6 bg-charcoal">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative"
+    <section id="about" className="py-24 px-6 bg-white">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+        <motion.div
+           initial={{ opacity: 0, x: -30 }}
+           whileInView={{ opacity: 1, x: 0 }}
+           className="relative"
         >
-          <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-neon-red/50 z-10" />
-          <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-neon-red/50 z-10" />
-          <img 
-            src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1200&auto=format&fit=crop" 
-            alt="Gym Interior" 
-            className="rounded-sm relative z-0 grayscale hover:grayscale-0 transition-all duration-700"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute -bottom-10 -left-10 bg-neon-red p-8 hidden md:block">
-            <span className="block text-4xl font-black italic">5.0</span>
-            <span className="text-xs uppercase tracking-tighter opacity-80">Google Rating</span>
+          <div className="absolute -top-6 -left-6 w-32 h-32 bg-sky-50 rounded-full -z-10" />
+          <div className="grid grid-cols-2 gap-4">
+            <img 
+              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600&auto=format&fit=crop" 
+              alt="Clinic" 
+              className="rounded-2xl shadow-xl mt-8"
+              referrerPolicy="no-referrer"
+            />
+            <img 
+              src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=600&auto=format&fit=crop" 
+              alt="Treatment" 
+              className="rounded-2xl shadow-xl"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-blue text-white p-6 rounded-2xl shadow-xl shadow-sky-200">
+             <div className="text-center">
+               <span className="block text-3xl font-extrabold italic">10+</span>
+               <span className="text-[10px] uppercase font-bold tracking-widest">Years Exp.</span>
+             </div>
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-8">
-            The <span className="text-neon-red">Warrior</span> Fitness Culture
-          </h2>
-          <p className="text-lg text-white/70 mb-8 leading-relaxed font-light">
-            Warrior Fitness is one of Vadodara’s fastest-growing premium gyms, known for its high-energy environment, modern equipment, and supportive trainers dedicated to real fitness transformations.
+          <span className="section-subtitle">Since 2014</span>
+          <h2 className="section-title">Compassionate Dental Care <span className="text-brand-blue">For Every Family</span></h2>
+          <p className="text-slate-600 mb-8 leading-relaxed">
+            At Affection Dental Care, we believe everyone deserves a healthy, confident smile. Our clinic is designed to provide a calm, anxiety-free environment where patients of all ages can receive professional oral healthcare.
           </p>
-          <div className="grid grid-cols-2 gap-6 mb-10">
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="text-neon-red w-5 h-5 mt-1 shrink-0" />
-              <div>
-                <h4 className="font-bold text-sm uppercase">Energetic Vibe</h4>
-                <p className="text-xs text-white/50">Motivating atmosphere for peak performance.</p>
+          <div className="space-y-4 mb-10">
+            {[
+              "Patient-first personalized care",
+              "Advanced sterilization and hygiene protocols",
+              "Experienced and gentle dental professionals",
+              "Affordable treatment with transparent pricing"
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-sky-100 text-brand-blue rounded-full flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="w-4 h-4" />
+                </div>
+                <span className="text-slate-700 font-medium">{item}</span>
               </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="text-neon-red w-5 h-5 mt-1 shrink-0" />
-              <div>
-                <h4 className="font-bold text-sm uppercase">Expert Coaching</h4>
-                <p className="text-xs text-white/50">Supportive trainers for every level.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="text-neon-red w-5 h-5 mt-1 shrink-0" />
-              <div>
-                <h4 className="font-bold text-sm uppercase">Clean Safety</h4>
-                <p className="text-xs text-white/50">Spacious, clean, and safe environment.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="text-neon-red w-5 h-5 mt-1 shrink-0" />
-              <div>
-                <h4 className="font-bold text-sm uppercase">Community</h4>
-                <p className="text-xs text-white/50">Join a family of fitness warriors.</p>
-              </div>
-            </div>
+            ))}
           </div>
-          <button className="flex items-center gap-3 text-neon-red font-bold uppercase tracking-widest text-sm hover:gap-5 transition-all">
-            Learn More About Us <ArrowRight className="w-5 h-5" />
-          </button>
+          <a href="#services" className="btn-premium btn-primary">
+            Explore Services
+          </a>
         </motion.div>
       </div>
     </section>
   );
 };
 
-const Features = () => {
-  const features = [
+const Services = () => {
+  const services = [
     {
-      icon: <Dumbbell className="w-8 h-8" />,
-      title: "Imported Equipment",
-      desc: "Train on world-class, premium imported strength machines designed for bio-mechanical precision."
+      icon: <Smile className="w-8 h-8" />,
+      title: "Teeth Cleaning",
+      desc: "Comprehensive prophylaxis to remove plaque, tartar, and surface stains."
     },
     {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Functional Zone",
-      desc: "Dedicated spacious area for cross-training, bodyweight drills, and functional movements."
+      icon: <Stethoscope className="w-8 h-8" />,
+      title: "Root Canal",
+      desc: "Painless laser-assisted root canal treatments to save your natural teeth."
     },
     {
       icon: <ShieldCheck className="w-8 h-8" />,
-      title: "Modern Cardio Zone",
-      desc: "High-end fleet of treadmills and ellipticals with clean, spacious training environments."
+      title: "Dental Implants",
+      desc: "Permanent and durable tooth replacement solutions with a natural look."
     },
     {
-      icon: <Star className="w-8 h-8" />,
-      title: "Friendly Trainers",
-      desc: "Our supportive and motivating certified trainers treat you like family while pushing your limits."
+      icon: <Award className="w-8 h-8" />,
+      title: "Braces & Aligners",
+      desc: "Orthodontic solutions including invisible aligners for a straighter smile."
     },
     {
-      icon: <CheckCircle2 className="w-8 h-8" />,
-      title: "Personalized Support",
-      desc: "Receive customized workout support and diet guidance tailored to your transformation goals."
+      icon: <Sparkles className="w-8 h-8" />,
+      title: "Smile Makeover",
+      desc: "Customized cosmetic plans to enhance the aesthetic appearance of your smile."
     },
     {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Positive Atmosphere",
-      desc: "Experience a high-energy, motivational fitness culture that keeps you coming back for more."
+      icon: <Baby className="w-8 h-8" />,
+      title: "Kids Dentistry",
+      desc: "Shedding the fear of dentists with kid-friendly treatments and games."
     }
   ];
 
   return (
-    <section id="features" className="py-24 px-6">
+    <section id="services" className="py-24 px-6 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-4">Elite <span className="text-neon-red">Features</span></h2>
-          <p className="text-white/50 max-w-2xl mx-auto">Design for performance. Built for warriors. Experience Vadodara’s most modern training facility.</p>
+          <span className="section-subtitle">Expertise</span>
+          <h2 className="section-title">Specialized <span className="text-brand-blue">Treatments</span></h2>
+          <p className="text-slate-500 max-w-2xl mx-auto">From routine checkups to complex cosmetic surgeries, we offer a full range of modern dental services.</p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((f, i) => (
-            <motion.div 
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((s, i) => (
+            <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ delay: i * 0.1 }}
               whileHover={{ y: -10 }}
-              className="glass-card p-8 group transition-all"
+              className="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-xl transition-all"
             >
-              <div className="text-neon-red mb-6 group-hover:scale-110 transition-transform duration-300">
-                {f.icon}
+              <div className="w-16 h-16 bg-sky-50 text-brand-blue rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                {s.icon}
               </div>
-              <h3 className="text-xl font-bold uppercase italic mb-3">{f.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed">{f.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Membership = () => {
-  const plans = [
-    {
-      name: "Starter Warrior",
-      price: "1,999",
-      features: ["Gym floor access", "Locker facility", "Standard assessment"],
-      recommended: false
-    },
-    {
-      name: "Pro Warrior",
-      price: "3,499",
-      features: ["Full gym access", "Strength + Cardio zones", "1 PT Session/mo", "Diet Plan"],
-      recommended: true
-    },
-    {
-      name: "Elite Transformation",
-      price: "5,999",
-      features: ["All access", "Priority PT guidance", "Advanced assessments", "Personalized Supplements Guide"],
-      recommended: false
-    }
-  ];
-
-  return (
-    <section id="membership" className="py-24 px-6 bg-charcoal overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16 px-6">
-          <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-4">Choose Your <span className="text-neon-red">Vessel</span></h2>
-          <p className="text-white/50 max-w-2xl mx-auto">Transparent pricing for elite training. No hidden fees. Just results.</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-end">
-          {plans.map((p, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className={`relative glass-card p-10 flex flex-col ${p.recommended ? "border-neon-red/50 py-16 bg-white/[0.07]" : ""}`}
-            >
-              {p.recommended && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-neon-red text-white py-1 px-4 text-[10px] font-black uppercase tracking-[0.2em] rounded-sm">
-                  Most Popular
-                </div>
-              )}
-              <h3 className="text-lg font-black uppercase italic mb-2 tracking-widest">{p.name}</h3>
-              <div className="flex items-baseline gap-1 mb-8">
-                <span className="text-sm font-bold text-neon-red">₹</span>
-                <span className="text-5xl font-black leading-none">{p.price}</span>
-                <span className="text-xs text-white/30 uppercase">/ Month</span>
-              </div>
-              <div className="space-y-4 mb-10 flex-grow">
-                {p.features.map((f, j) => (
-                  <div key={j} className="flex items-center gap-3 text-sm text-white/70">
-                    <CheckCircle2 className="w-4 h-4 text-neon-red shrink-0" />
-                    <span>{f}</span>
-                  </div>
-                ))}
-              </div>
-              <button className={`btn-premium transition-all ${p.recommended ? "btn-primary" : "btn-secondary"}`}>
-                Begin Now
+              <h3 className="text-xl font-bold text-brand-navy mb-4">{s.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                {s.desc}
+              </p>
+              <button className="text-brand-blue font-bold text-xs uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
+                Learn More <ChevronRight className="w-4 h-4" />
               </button>
             </motion.div>
           ))}
@@ -380,119 +332,96 @@ const Membership = () => {
   );
 };
 
-const Transformations = () => {
-  return (
-    <section id="transformations" className="py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-4">Real <span className="text-neon-red">Results</span></h2>
-            <p className="text-white/50 max-w-xl">Every story in this gallery represents sweat, discipline, and the Warrior mindset. You could be next.</p>
-          </div>
-          <button className="flex items-center gap-2 py-3 px-8 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white/5">
-            View All Stories <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
+const WhyChooseUs = () => {
+  const features = [
+    { icon: <Users />, title: "Experienced Doctors", desc: "Highly qualified dental surgeons with years of expertise." },
+    { icon: <Sparkles />, title: "Modern Equipment", desc: "Equipped with the latest digital dental technologies." },
+    { icon: <Heart />, title: "Comfortable Clinic", desc: "A soothing atmosphere designed for patient relaxation." },
+    { icon: <ShieldCheck />, title: "Hygienic Environment", desc: "Strict 7-step sterilization following international standards." }
+  ];
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-sm">
+  return (
+    <section id="why-choose-us" className="py-24 px-6 bg-brand-navy text-white relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+        >
+          <span className="section-subtitle !text-brand-blue">Excellence</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-8 leading-tight">Why Patients Trust <br /><span className="text-brand-blue">Affection Dental</span></h2>
+          <p className="text-slate-400 mb-12 text-lg">
+            We focus on outcome-based dentistry. Our goal isn't just to fix a problem, but to ensure long-term oral health and patient satisfaction.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-8">
+            {features.map((f, i) => (
+              <div key={i} className="space-y-3">
+                <div className="w-12 h-12 bg-brand-blue/10 text-brand-blue rounded-xl flex items-center justify-center">
+                  {f.icon}
+                </div>
+                <h4 className="font-bold text-lg">{f.title}</h4>
+                <p className="text-slate-500 text-sm">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          className="relative"
+        >
+          <div className="relative rounded-[40px] overflow-hidden">
             <img 
-              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop" 
-              alt="Transformation One" 
-              className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 h-[600px] grayscale group-hover:grayscale-0"
+              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1000&auto=format&fit=crop" 
+              alt="Doctor Training" 
+              className="w-full grayscale contrast-125"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-            <div className="absolute bottom-6 left-6">
-              <span className="text-neon-red text-xs font-bold uppercase tracking-widest mb-1 block">Weight Loss Expert</span>
-              <h4 className="text-2xl font-black uppercase italic">Hardik's Journey</h4>
-              <p className="text-white/60 text-sm">Lost 22kg in 6 Months</p>
-            </div>
+            <div className="absolute inset-0 bg-brand-blue/20 mix-blend-overlay" />
           </div>
-          <div className="relative group overflow-hidden rounded-sm h-[300px]">
-             <img 
-              src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop" 
-              alt="Transformation Two" 
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
-              referrerPolicy="no-referrer"
-            />
-             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute -bottom-10 -right-10 hidden xl:block">
+             <div className="bg-white text-brand-navy p-10 rounded-3xl shadow-2xl">
+                <div className="flex items-center gap-4">
+                   <div className="text-4xl font-extrabold text-brand-blue">98%</div>
+                   <div className="text-[10px] uppercase font-bold tracking-widest leading-tight">Patient <br />Satisfaction</div>
+                </div>
+             </div>
           </div>
-          <div className="relative group overflow-hidden rounded-sm h-[300px]">
-             <img 
-              src="https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=800&auto=format&fit=crop" 
-              alt="Transformation Three" 
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          <div className="relative group overflow-hidden rounded-sm h-[300px] lg:col-span-2">
-             <img 
-              src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop" 
-              alt="Transformation Four" 
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
-const Trainers = () => {
-  const trainers = [
-    {
-      name: "Rahul Sharma",
-      role: "Head Strength Coach",
-      exp: "10+ Years",
-      img: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=800&auto=format&fit=crop"
-    },
-    {
-      name: "Priya V.",
-      role: "Transformation Specialist",
-      exp: "6+ Years",
-      img: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=800&auto=format&fit=crop"
-    },
-    {
-      name: "Amit Patel",
-      role: "Functional Training",
-      exp: "8+ Years",
-      img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop"
-    }
+const Gallery = () => {
+  const images = [
+    "https://images.unsplash.com/photo-1597764690523-15bea4c581c9?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1445527815219-ecbfec67492e?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop"
   ];
 
   return (
-    <section id="trainers" className="py-24 px-6 bg-charcoal">
+    <section id="gallery" className="py-24 px-6 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-4">Elite <span className="text-neon-red">Commanders</span></h2>
-          <p className="text-white/50 max-w-2xl mx-auto">Certified experts dedicated to push you beyond your limits. Real science, real sweat.</p>
+          <span className="section-subtitle">Our Home</span>
+          <h2 className="section-title">The <span className="text-brand-blue">Clinic</span> Experience</h2>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {trainers.map((t, i) => (
-            <motion.div 
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {images.map((img, i) => (
+            <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-sm"
+              whileHover={{ scale: 1.05 }}
+              className="aspect-square rounded-2xl overflow-hidden shadow-lg"
             >
               <img 
-                src={t.img} 
-                alt={t.name} 
-                className="w-full aspect-[4/5] object-cover group-hover:scale-110 transition-transform duration-700 grayscale contrast-125"
+                src={img} 
+                alt="Clinic Interior" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" 
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-matte-black via-transparent to-transparent opacity-80" />
-              <div className="absolute bottom-0 left-0 w-full p-8 transition-transform duration-500 group-hover:-translate-y-2">
-                <span className="text-neon-red text-xs font-bold uppercase tracking-widest block mb-1">{t.role}</span>
-                <h4 className="text-2xl font-black uppercase italic mb-1">{t.name}</h4>
-                <div className="flex items-center gap-2 text-white/50 text-xs">
-                  <Clock className="w-3 h-3" /> {t.exp} Professional Experience
-                </div>
-              </div>
             </motion.div>
           ))}
         </div>
@@ -503,56 +432,43 @@ const Trainers = () => {
 
 const Reviews = () => {
   const reviews = [
-    {
-      name: "Vikram Mehta",
-      text: "Great atmosphere and clean space. Best gym vibe in Harni area. The trainers are very supportive and push you to do your best every day.",
-      stars: 5
-    },
-    {
-      name: "Sneha Kapadia",
-      text: "Supportive and motivating trainers! Wide range of modern equipment. I've been training here for 3 months and the results are incredible.",
-      stars: 5
-    },
-    {
-      name: "Rohan Deshmukh",
-      text: "Best gym vibe and perfect training environment. Premium equipment that you won't find anywhere else in Vadodara. Highly recommend Warrior Fitness.",
-      stars: 5
-    }
+    { name: "Rahul Deshmukh", text: "Truly the best dental experience I've had. The doctor was very patient and explained everything clearly. Painless root canal!", stars: 5 },
+    { name: "Sneha Patel", text: "Taking my kids to a dentist used to be a nightmare until we found Affection Dental. The staff is so friendly and good with children.", stars: 5 },
+    { name: "Amit Shah", text: "Cleanest clinic in Fatehgunj. Very professional and the equipments are high tech. Highly recommend for implants.", stars: 5 }
   ];
 
   return (
-    <section id="reviews" className="py-24 px-6">
+    <section id="reviews" className="py-24 px-6 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-1 mb-4">
-            {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-neon-red fill-neon-red" />)}
+            {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-orange-400 fill-orange-400" />)}
           </div>
-          <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-4">Rated <span className="text-neon-red">Top Class</span></h2>
-          <p className="text-white/50">Trusted by over 1,000+ members in Vadodara. 174+ Five-star Google Reviews.</p>
+          <h2 className="section-title">What Our <span className="text-brand-blue">Patients Say</span></h2>
+          <p className="text-slate-500">4.8 Average Rating • 1,000+ Reviews Across Platforms</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {reviews.map((r, i) => (
-            <motion.div 
+            <motion.div
               key={i}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="glass-card p-10 flex flex-col justify-between"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm relative"
             >
-              <div>
-                <div className="flex gap-1 mb-6">
-                   {[...Array(r.stars)].map((_, j) => <Star key={j} className="w-3 h-3 text-neon-red fill-neon-red" />)}
-                </div>
-                <p className="text-white/70 italic text-lg leading-relaxed mb-8">“{r.text}”</p>
+              <div className="absolute top-10 right-10 text-slate-100 text-6xl font-serif">“</div>
+              <div className="flex gap-1 mb-6">
+                 {[...Array(r.stars)].map((_, j) => <Star key={j} className="w-3 h-3 text-orange-400 fill-orange-400" />)}
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-neon-red flex items-center justify-center font-black text-xs italic">
+              <p className="text-slate-600 mb-8 italic leading-relaxed relative z-10">"{r.text}"</p>
+              <div className="flex items-center gap-4 border-t border-slate-50 pt-6">
+                <div className="w-10 h-10 rounded-full bg-sky-100 text-brand-blue flex items-center justify-center font-bold text-xs">
                   {r.name.charAt(0)}
                 </div>
                 <div>
-                   <h5 className="font-bold text-sm uppercase">{r.name}</h5>
-                   <span className="text-[10px] text-white/30 uppercase tracking-widest italic">Google Reviewer</span>
+                   <h5 className="font-bold text-sm text-brand-navy leading-none">{r.name}</h5>
+                   <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest mt-1">Verified Patient</p>
                 </div>
               </div>
             </motion.div>
@@ -565,64 +481,86 @@ const Reviews = () => {
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 px-6 bg-charcoal">
+    <section id="contact" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+        <div className="grid lg:grid-cols-2 gap-16">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
           >
-            <h2 className="text-4xl md:text-5xl font-black uppercase italic mb-8">Join The <span className="text-neon-red">Vanguard</span></h2>
-            <p className="text-white/60 mb-10 text-lg">Have questions? Want to book a trial? Reach out and we'll get you started on your transformation journey.</p>
+            <span className="section-subtitle">Get In Touch</span>
+            <h2 className="section-title">Schedule Your <span className="text-brand-blue">Smile Consult</span></h2>
+            <p className="text-slate-500 mb-10">Fill out the form below and our team will get back to you within 2 business hours for confirmation.</p>
             
             <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <input type="text" placeholder="Full Name" className="w-full bg-matte-black border border-white/10 p-4 rounded-sm focus:border-neon-red outline-none transition-colors" />
-                <input type="email" placeholder="Email Address" className="w-full bg-matte-black border border-white/10 p-4 rounded-sm focus:border-neon-red outline-none transition-colors" />
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Full Name</label>
+                  <input type="text" className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Phone Number</label>
+                  <input type="tel" className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all" />
+                </div>
               </div>
-              <input type="tel" placeholder="Phone Number" className="w-full bg-matte-black border border-white/10 p-4 rounded-sm focus:border-neon-red outline-none transition-colors" />
-              <textarea placeholder="Tell us your goals" rows={5} className="w-full bg-matte-black border border-white/10 p-4 rounded-sm focus:border-neon-red outline-none transition-colors" />
-              <button className="btn-premium btn-primary w-full md:w-auto">
-                Send Inquiry
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Treatment Type</label>
+                  <select className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all appearance-none">
+                    <option>Teeth Cleaning</option>
+                    <option>Root Canal</option>
+                    <option>Dental Implants</option>
+                    <option>Checkup</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Preferred Date</label>
+                  <input type="date" className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Message</label>
+                <textarea rows={4} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all" />
+              </div>
+              <button className="btn-premium btn-primary w-full py-5">
+                Request Appointment
               </button>
             </form>
-
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="flex items-start gap-4">
-                <MapPin className="text-neon-red w-6 h-6 shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-bold uppercase text-sm mb-2">Location</h4>
-                  <p className="text-white/50 text-sm leading-relaxed">
-                    4th Floor, Siddheshwar Paradise, Harni, Vadodara, Gujarat 390024
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <Phone className="text-neon-red w-6 h-6 shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-bold uppercase text-sm mb-2">Contact</h4>
-                  <p className="text-white/50 text-sm">+91 84600 55933</p>
-                </div>
-              </div>
-            </div>
           </motion.div>
 
-          <motion.div 
-             initial={{ opacity: 0, scale: 0.95 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             transition={{ duration: 0.8 }}
-             className="h-full min-h-[400px] border border-white/10 grayscale hover:grayscale-0 transition-all duration-700"
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="flex flex-col gap-8"
           >
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.669527962164!2d73.2201083759367!3d22.32832814188737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fcf46c2f9d5ef%3A0xe543df65d836269b!2sWarrior%20Fitness!5e0!3m2!1sen!2sin!4v1716100000000!5m2!1sen!2sin" 
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen="" 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <div className="h-[400px] rounded-[40px] overflow-hidden border-8 border-slate-50 shadow-xl grayscale hover:grayscale-0 transition-all duration-700">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.669!2d73.190!3d22.330!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fcf46c2f9d5ef%3A0xe543df65d836269b!2sAffection%20Dental%20Care!5e0!3m2!1sen!2sin!4v1716100000000!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+            
+            <div className="grid sm:grid-cols-2 gap-8">
+               <div className="glass-card p-6 rounded-3xl">
+                  <div className="w-10 h-10 bg-sky-50 text-brand-blue rounded-xl flex items-center justify-center mb-4">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-bold text-brand-navy uppercase text-[10px] tracking-widest mb-1">Our Location</h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">GF 21, Saffron Complex, Fategunj, Vadodara, 390008</p>
+               </div>
+               <div className="glass-card p-6 rounded-3xl">
+                  <div className="w-10 h-10 bg-sky-50 text-brand-blue rounded-xl flex items-center justify-center mb-4">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-bold text-brand-navy uppercase text-[10px] tracking-widest mb-1">Call Us</h4>
+                  <p className="text-xs text-slate-500 leading-relaxed">+91 96870 56003</p>
+               </div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -633,12 +571,12 @@ const Contact = () => {
 const WhatsAppButton = () => {
   return (
     <motion.a 
-      href="https://wa.me/918460055933"
+      href="https://wa.me/919687056003"
       target="_blank"
       rel="noreferrer"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-8 right-8 z-[60] bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center neon-glow"
+      className="fixed bottom-8 right-8 z-[60] bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center shadow-green-200"
     >
       <MessageCircle className="w-8 h-8 fill-white/20" />
     </motion.a>
@@ -647,68 +585,81 @@ const WhatsAppButton = () => {
 
 const Footer = () => {
   return (
-    <footer className="py-20 px-6 border-t border-white/10">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-16 mb-20">
-        <div className="max-w-xs">
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 bg-neon-red rounded-sm flex items-center justify-center rotate-45">
-              <Dumbbell className="text-white w-4 h-4 -rotate-45" />
+    <footer className="py-20 px-6 bg-slate-50 border-t border-slate-100">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-4 gap-12 mb-20">
+          <div className="col-span-1 md:col-span-1">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-8 h-8 bg-brand-blue rounded-lg flex items-center justify-center">
+                <Heart className="text-white w-5 h-5 fill-white/20" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-heading font-extrabold text-lg leading-none text-brand-navy">
+                  Affection
+                </span>
+                <span className="text-[8px] uppercase font-bold tracking-[0.2em] text-brand-blue mt-1">
+                  Dental Care
+                </span>
+              </div>
             </div>
-            <span className="font-heading font-black text-xl italic uppercase tracking-tighter">
-              Warrior <span className="text-neon-red">Fitness</span>
-            </span>
+            <p className="text-slate-500 text-sm leading-relaxed mb-8">
+              Providing premium dentistry with a patient-first approach. Focused on hygiene, comfort, and results.
+            </p>
+            <div className="flex gap-4">
+              {[Instagram, Facebook, Twitter].map((Icon, idx) => (
+                <a key={idx} href="#" className="w-10 h-10 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
           </div>
-          <p className="text-white/40 text-sm leading-relaxed mb-8">
-            Experience Vadodara's fast-growing premium fitness destination. Transformation is more than just working out—it's about becoming a warrior.
-          </p>
-          <div className="flex gap-4">
-             <a href="#" className="w-10 h-10 border border-white/10 flex items-center justify-center rounded-sm hover:border-neon-red transition-colors text-white/50 hover:text-neon-red">
-               <Instagram className="w-4 h-4" />
-             </a>
-             <a href="#" className="w-10 h-10 border border-white/10 flex items-center justify-center rounded-sm hover:border-neon-red transition-colors text-white/50 hover:text-neon-red">
-              <Facebook className="w-4 h-4" />
-             </a>
-             <a href="#" className="w-10 h-10 border border-white/10 flex items-center justify-center rounded-sm hover:border-neon-red transition-colors text-white/50 hover:text-neon-red">
-              <Twitter className="w-4 h-4" />
-             </a>
+
+          <div>
+             <h5 className="font-extrabold text-brand-navy mb-6 uppercase text-xs tracking-widest">Clinic Info</h5>
+             <ul className="space-y-4 text-sm text-slate-500 font-medium">
+               <li className="flex gap-3"><Clock className="w-4 h-4 text-brand-blue shrink-0" /> Mon - Sat: 9AM - 8PM</li>
+               <li className="flex gap-3"><MapPin className="w-4 h-4 text-brand-blue shrink-0" /> Saffron Shopping Center, Fatehgunj</li>
+               <li className="flex gap-3"><Phone className="w-4 h-4 text-brand-blue shrink-0" /> +91 96870 56003</li>
+             </ul>
+          </div>
+
+          <div>
+             <h5 className="font-extrabold text-brand-navy mb-6 uppercase text-xs tracking-widest">Quick Links</h5>
+             <ul className="grid grid-cols-2 gap-4 text-sm text-slate-500 font-medium">
+               <li><a href="#about" className="hover:text-brand-blue">About</a></li>
+               <li><a href="#services" className="hover:text-brand-blue">Services</a></li>
+               <li><a href="#gallery" className="hover:text-brand-blue">Gallery</a></li>
+               <li><a href="#reviews" className="hover:text-brand-blue">Reviews</a></li>
+               <li><a href="#contact" className="hover:text-brand-blue">Contact</a></li>
+               <li><a href="#" className="hover:text-brand-blue">FAQ</a></li>
+             </ul>
+          </div>
+
+          <div>
+            <h5 className="font-extrabold text-brand-navy mb-6 uppercase text-xs tracking-widest">Our Mission</h5>
+            <div className="bg-white p-6 rounded-3xl border border-slate-100">
+               <p className="text-xs text-slate-500 italic leading-loose">
+                 "To provide the highest standard of oral healthcare in a caring and empathetic manner, making dental visits something patients look forward to."
+               </p>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-12 flex-grow justify-end">
-          <div>
-            <h5 className="font-black italic uppercase text-xs tracking-widest mb-6">Quick Links</h5>
-             <ul className="space-y-4 text-sm text-white/40 uppercase font-medium">
-               <li><a href="#about" className="hover:text-neon-red">About</a></li>
-               <li><a href="#membership" className="hover:text-neon-red">Plans</a></li>
-               <li><a href="#trainers" className="hover:text-neon-red">Trainers</a></li>
-               <li><a href="#contact" className="hover:text-neon-red">Contact</a></li>
-             </ul>
-          </div>
-          <div>
-            <h5 className="font-black italic uppercase text-xs tracking-widest mb-6">Resources</h5>
-             <ul className="space-y-4 text-sm text-white/40 uppercase font-medium">
-               <li><a href="#" className="hover:text-neon-red">Blog</a></li>
-               <li><a href="#" className="hover:text-neon-red">Guidelines</a></li>
-               <li><a href="#" className="hover:text-neon-red">FAQ</a></li>
-             </ul>
-          </div>
-          <div>
-            <h5 className="font-black italic uppercase text-xs tracking-widest mb-6">Training Hours</h5>
-             <ul className="space-y-2 text-sm text-white/40 font-medium">
-               <li className="flex justify-between"><span>Mon - Sat:</span> <span className="text-white">6AM - 10PM</span></li>
-               <li className="flex justify-between"><span>Sunday:</span> <span className="text-white">Closed</span></li>
-             </ul>
+        <div className="pt-8 border-t border-slate-200/50 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+            © 2026 Affection Dental Care. All Rights Reserved.
+          </p>
+          <div className="flex items-center gap-4">
+             <div className="flex items-center gap-1 text-sky-600">
+                <ShieldCheck className="w-4 h-4" />
+                <span className="text-[10px] font-bold uppercase tracking-widest">Hygienic Safe</span>
+             </div>
+             <div className="flex items-center gap-1 text-sky-600">
+                <Award className="w-4 h-4" />
+                <span className="text-[10px] font-bold uppercase tracking-widest">Certified</span>
+             </div>
           </div>
         </div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p className="text-[10px] uppercase tracking-widest text-white/20">
-          © 2026 Warrior Fitness Harni. All Rights Reserved. Designed for Warriors.
-        </p>
-        <span className="text-[10px] uppercase tracking-[0.4em] font-black italic text-white/60">
-          Stay Hard <span className="text-neon-red">•</span> Stay Motivated
-        </span>
       </div>
     </footer>
   );
@@ -716,51 +667,71 @@ const Footer = () => {
 
 export default function App() {
   return (
-    <div className="relative overflow-x-hidden">
+    <div className="relative overflow-x-hidden selection:bg-brand-blue selection:text-white">
       <Navbar />
       <Hero />
-      <div className="relative z-10">
-        <About />
-        <Features />
-        
-        {/* Simple Stats Banner */}
-        <div className="py-20 border-y border-white/5 bg-matte-black overflow-hidden whitespace-nowrap">
-          <motion.div 
-            animate={{ x: [0, -1000] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            className="flex gap-20 text-6xl md:text-8xl font-black italic uppercase opacity-10"
-          >
-            {[...Array(6)].map((_, i) => (
-              <span key={i} className="flex items-center gap-8">
-                Transformation <Star className="w-12 h-12 fill-current" /> Discipline <Zap className="w-12 h-12 fill-current" /> Warrior <Dumbbell className="w-12 h-12 fill-current" />
-              </span>
-            ))}
-          </motion.div>
+      <About />
+      <Services />
+      
+      {/* Banner Stats */}
+      <section className="py-20 bg-brand-blue">
+         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center text-white">
+            <div>
+               <div className="text-4xl font-extrabold mb-2 underline decoration-white/20">4.8</div>
+               <div className="text-[10px] uppercase font-black tracking-widest opacity-80">Google Rating</div>
+            </div>
+            <div>
+               <div className="text-4xl font-extrabold mb-2 underline decoration-white/20">10+</div>
+               <div className="text-[10px] uppercase font-black tracking-widest opacity-80">Years Exp.</div>
+            </div>
+            <div>
+               <div className="text-4xl font-extrabold mb-2 underline decoration-white/20">24/7</div>
+               <div className="text-[10px] uppercase font-black tracking-widest opacity-80">Emergency Care</div>
+            </div>
+            <div>
+               <div className="text-4xl font-extrabold mb-2 underline decoration-white/20">1k+</div>
+               <div className="text-[10px] uppercase font-black tracking-widest opacity-80">Smiles Made</div>
+            </div>
+         </div>
+      </section>
+
+      <WhyChooseUs />
+      <Gallery />
+      <Reviews />
+
+      {/* Floating Section CTA */}
+      <section className="py-24 px-6 bg-slate-50">
+        <div className="max-w-5xl mx-auto bg-brand-blue rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-sky-200">
+           <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%)] bg-[length:200%_200%] animate-[shimmer_5s_infinite_linear]" />
+           <motion.div
+             initial={{ opacity: 0, scale: 0.95 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             className="relative z-10"
+           >
+              <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-8">Ready For A <span className="underline decoration-white/30">Lighter Smile?</span></h2>
+              <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+                Join our patient family today. Book your consultation and experience the difference at Affection Dental Care.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                 <a href="#contact" className="px-10 py-5 bg-white text-brand-blue font-extrabold rounded-full hover:scale-105 transition-all shadow-xl">Book Free Consultation</a>
+                 <a href="https://wa.me/919687056003" className="px-10 py-5 bg-brand-navy text-white font-extrabold rounded-full hover:scale-105 transition-all flex items-center justify-center gap-2">
+                    WhatsApp Us <ArrowRight className="w-4 h-4 text-brand-blue" />
+                 </a>
+              </div>
+           </motion.div>
         </div>
+      </section>
 
-        <Membership />
-        <Transformations />
-        <Trainers />
-        <Reviews />
-        
-        {/* Banner CTA */}
-        <section className="py-24 px-6 relative overflow-hidden bg-neon-red">
-          <div className="absolute top-0 right-0 w-1/3 h-full bg-black/10 skew-x-[-20deg] translate-x-1/2" />
-          <div className="max-w-7xl mx-auto relative z-10 text-center">
-             <h2 className="text-4xl md:text-6xl font-black italic uppercase mb-8">Your Transformation Starts Today</h2>
-             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#contact" className="px-10 py-5 bg-white text-neon-red font-black uppercase tracking-widest text-sm hover:scale-105 transition-all">Book Free Trial</a>
-                <a href="https://wa.me/918460055933" target="_blank" rel="noreferrer" className="px-10 py-5 border-2 border-white text-white font-black uppercase tracking-widest text-sm hover:bg-white hover:text-neon-red transition-all flex items-center gap-2">
-                   Contact on WhatsApp <MessageCircle className="w-5 h-5" />
-                </a>
-             </div>
-          </div>
-        </section>
-
-        <Contact />
-        <Footer />
-      </div>
+      <Contact />
+      <Footer />
       <WhatsAppButton />
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+      `}} />
     </div>
   );
 }
