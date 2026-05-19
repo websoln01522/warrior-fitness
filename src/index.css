@@ -4,15 +4,15 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Plus Jakarta Sans", sans-serif;
-  --color-brand-blue: #0ea5e9;
-  --color-brand-teal: #0d9488;
-  --color-brand-navy: #0f172a;
-  --color-soft-bg: #f8fafc;
+  --color-brand-pink: #f43f5e;
+  --color-brand-purple: #8b5cf6;
+  --color-brand-black: #0f172a;
+  --color-soft-pink: #fff1f2;
 }
 
 @layer base {
   body {
-    @apply bg-white text-brand-navy font-sans antialiased;
+    @apply bg-white text-brand-black font-sans antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -21,14 +21,14 @@
 }
 
 @layer utilities {
-  .text-glow-blue {
-    text-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+  .text-glow-pink {
+    text-shadow: 0 0 20px rgba(244, 63, 94, 0.2);
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/80 backdrop-blur-md border border-slate-200 shadow-xl shadow-slate-200/50;
+    @apply bg-white/80 backdrop-blur-md border border-rose-100 shadow-xl shadow-rose-200/20;
   }
 
   .btn-premium {
@@ -36,19 +36,19 @@
   }
 
   .btn-primary {
-    @apply bg-brand-blue text-white hover:bg-sky-600 shadow-lg shadow-sky-200;
+    @apply bg-brand-pink text-white hover:bg-rose-600 shadow-lg shadow-rose-200;
   }
 
   .btn-secondary {
-    @apply bg-white text-brand-navy border border-slate-200 hover:bg-slate-50 shadow-sm;
+    @apply bg-white text-brand-black border border-slate-200 hover:bg-rose-50 hover:border-rose-200 shadow-sm transition-all;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-navy mb-4;
+    @apply text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-black mb-4;
   }
 
   .section-subtitle {
-    @apply text-brand-blue font-bold uppercase tracking-[0.2em] text-xs mb-3 block;
+    @apply text-brand-pink font-bold uppercase tracking-[0.2em] text-xs mb-3 block;
   }
 }
 
@@ -60,5 +60,5 @@
   @apply bg-slate-50;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-brand-blue/20 rounded-full hover:bg-brand-blue/40;
+  @apply bg-brand-pink/20 rounded-full hover:bg-brand-pink/40;
 }

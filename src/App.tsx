@@ -14,14 +14,18 @@ import {
   ChevronRight, 
   Menu, 
   X,
-  Stethoscope,
-  Sparkles,
-  Baby,
-  Smile,
   Instagram,
   Facebook,
   Twitter,
-  ArrowRight
+  ArrowRight,
+  Zap,
+  Music,
+  Dumbbell,
+  Wind,
+  Apple,
+  Video,
+  Flower2,
+  Users2
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -39,25 +43,25 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Why Us", href: "#why-choose-us" },
-    { name: "Gallery", href: "#gallery" },
-    { name: "Reviews", href: "#reviews" },
+    { name: "Programs", href: "#programs" },
+    { name: "Schedule", href: "#schedule" },
+    { name: "Success Stories", href: "#transformations" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/90 backdrop-blur-xl border-b border-slate-100 py-3 shadow-sm" : "bg-transparent py-5"}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/90 backdrop-blur-xl border-b border-rose-100 py-3 shadow-sm" : "bg-transparent py-5"}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center shadow-lg shadow-sky-200">
-            <Heart className="text-white w-6 h-6 fill-white/20" />
+          <div className="w-10 h-10 bg-brand-pink rounded-xl flex items-center justify-center shadow-lg shadow-rose-200">
+            <Zap className="text-white w-6 h-6 fill-white/20" />
           </div>
           <div className="flex flex-col">
-            <span className="font-heading font-extrabold text-xl leading-none text-brand-navy">
-              Affection
+            <span className="font-heading font-extrabold text-xl leading-none text-brand-black">
+              FITJIYO
             </span>
-            <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-brand-blue leading-none mt-1">
-              Dental Care
+            <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-brand-pink leading-none mt-1">
+              FITNESS
             </span>
           </div>
         </div>
@@ -68,18 +72,18 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-sm font-semibold text-slate-600 hover:text-brand-blue transition-colors"
+              className={`text-sm font-semibold transition-colors ${isScrolled ? "text-slate-600" : "text-white/90 hover:text-white"}`}
             >
               {link.name}
             </a>
           ))}
           <a href="#contact" className="btn-premium btn-primary py-2 px-6">
-            Book Appointment
+            Book Free Trial
           </a>
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-brand-navy" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <button className={`md:hidden ${isScrolled ? "text-brand-black" : "text-white"}`} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -91,7 +95,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-slate-100 overflow-hidden shadow-xl"
+            className="md:hidden bg-white border-b border-rose-100 overflow-hidden shadow-xl"
           >
             <div className="p-6 flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -99,13 +103,13 @@ const Navbar = () => {
                   key={link.name} 
                   href={link.href} 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-bold text-slate-700 hover:text-brand-blue"
+                  className="text-lg font-bold text-slate-700 hover:text-brand-pink"
                 >
                   {link.name}
                 </a>
               ))}
               <a href="#contact" className="btn-premium btn-primary w-full" onClick={() => setIsMobileMenuOpen(false)}>
-                Book Appointment
+                Book Free Trial
               </a>
             </div>
           </motion.div>
@@ -117,37 +121,47 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 overflow-hidden bg-slate-50">
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-sky-100/50 -skew-x-12 translate-x-1/4 -z-10" />
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=2000&auto=format&fit=crop" 
+          alt="Confident woman working out" 
+          className="w-full h-full object-cover"
+          referrerPolicy="no-referrer"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-black/90 via-brand-black/50 to-transparent" />
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
+          className="max-w-2xl"
         >
-          <span className="section-subtitle">Premium Oral Healthcare</span>
-          <h1 className="text-5xl lg:text-7xl font-extrabold text-brand-navy leading-[1.1] mb-6">
-            Your Smile Deserves <span className="text-brand-blue">Expert Care</span>
+          <span className="section-subtitle !text-brand-pink">Female Exclusive Fitness Studio</span>
+          <h1 className="text-5xl lg:text-8xl font-extrabold text-white leading-[1.05] mb-6">
+            Strong Women. <br /><span className="text-brand-pink text-glow-pink">Stronger Together.</span>
           </h1>
-          <p className="text-lg text-slate-600 mb-10 max-w-lg leading-relaxed">
-            Experience advanced dental treatments with a gentle touch. At Affection Dental Care, we combine technology with comfort for your perfect smile.
+          <p className="text-lg text-white/80 mb-10 max-w-lg leading-relaxed">
+            Transform your fitness journey in a safe & empowering space designed exclusively for women. Join Vadodara's premium fitness community.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href="#contact" className="btn-premium btn-primary">
-              Book Appointment <Calendar className="w-4 h-4 ml-1" />
+          <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <a href="#contact" className="btn-premium btn-primary text-base px-10 py-5">
+              Book Free Trial <ArrowRight className="w-5 h-5 ml-2" />
             </a>
-            <a href="tel:+919687056003" className="btn-premium btn-secondary">
-              <Phone className="w-4 h-4 mr-1 text-brand-blue" /> +91 96870 56003
+            <a href="#about" className="btn-premium bg-white/10 text-white backdrop-blur-md border border-white/20 hover:bg-white/20 px-10 py-5">
+              Join Fitjiyo Today
             </a>
           </div>
           
-          <div className="mt-12 flex items-center gap-6">
+          <div className="flex items-center gap-6">
             <div className="flex -space-x-3">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200">
+                <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-slate-200">
                   <img 
-                    src={`https://i.pravatar.cc/100?img=${i + 10}`} 
-                    alt="Patient" 
+                    src={`https://i.pravatar.cc/100?img=${i + 20}`} 
+                    alt="Member" 
                     className="w-full h-full rounded-full"
                     referrerPolicy="no-referrer"
                   />
@@ -157,73 +171,41 @@ const Hero = () => {
             <div>
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-orange-400 fill-orange-400" />)}
-                <span className="font-bold text-brand-navy ml-1">4.8</span>
+                <span className="font-bold text-white ml-1">4.9</span>
               </div>
-              <p className="text-xs text-slate-500 uppercase tracking-widest font-semibold">1,000+ Happy Patients</p>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, x: 50 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          className="relative"
-        >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-sky-200/30 rounded-full blur-3xl -z-10" />
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-sky-100 border-8 border-white">
-            <img 
-              src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200&auto=format&fit=crop" 
-              alt="Dental Care" 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute bottom-6 left-6 right-6">
-              <div className="glass-card p-4 rounded-2xl flex items-center gap-4">
-                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center">
-                  <ShieldCheck className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-sm text-brand-navy">Safety Guaranteed</h4>
-                  <p className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">ISO Certified Clinic</p>
-                </div>
-              </div>
+              <p className="text-xs text-white/60 uppercase tracking-widest font-semibold">87+ Google Reviews</p>
             </div>
           </div>
         </motion.div>
       </div>
+
+      <WhatsAppButton />
     </section>
   );
 };
 
 const About = () => {
   return (
-    <section id="about" className="py-24 px-6 bg-white">
+    <section id="about" className="py-24 px-6 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <motion.div
            initial={{ opacity: 0, x: -30 }}
            whileInView={{ opacity: 1, x: 0 }}
            className="relative"
         >
-          <div className="absolute -top-6 -left-6 w-32 h-32 bg-sky-50 rounded-full -z-10" />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="absolute -top-10 -left-10 w-40 h-40 bg-soft-pink rounded-full -z-10" />
+          <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl">
             <img 
-              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600&auto=format&fit=crop" 
-              alt="Clinic" 
-              className="rounded-2xl shadow-xl mt-8"
-              referrerPolicy="no-referrer"
-            />
-            <img 
-              src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=600&auto=format&fit=crop" 
-              alt="Treatment" 
-              className="rounded-2xl shadow-xl"
+              src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?q=80&w=1000&auto=format&fit=crop" 
+              alt="Women workout together" 
+              className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
           </div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-blue text-white p-6 rounded-2xl shadow-xl shadow-sky-200">
+          <div className="absolute bottom-10 -right-8 glass-card p-8 rounded-3xl shadow-2xl">
              <div className="text-center">
-               <span className="block text-3xl font-extrabold italic">10+</span>
-               <span className="text-[10px] uppercase font-bold tracking-widest">Years Exp.</span>
+               <span className="block text-4xl font-extrabold italic text-brand-pink">100%</span>
+               <span className="text-[10px] uppercase font-bold tracking-widest text-slate-500">Female Safe Space</span>
              </div>
           </div>
         </motion.div>
@@ -232,28 +214,31 @@ const About = () => {
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
         >
-          <span className="section-subtitle">Since 2014</span>
-          <h2 className="section-title">Compassionate Dental Care <span className="text-brand-blue">For Every Family</span></h2>
-          <p className="text-slate-600 mb-8 leading-relaxed">
-            At Affection Dental Care, we believe everyone deserves a healthy, confident smile. Our clinic is designed to provide a calm, anxiety-free environment where patients of all ages can receive professional oral healthcare.
+          <span className="section-subtitle">Since Day One</span>
+          <h2 className="section-title">A Community That <span className="text-brand-pink">Empowers Your Journey</span></h2>
+          <p className="text-slate-600 mb-8 text-lg leading-relaxed">
+            Fitjiyo Fitness isn't just a gym; it's a supportive sanctuary where women build confidence and strength. We provide a judgment-free environment designed to help you reach your goals while feeling safe and celebrated.
           </p>
-          <div className="space-y-4 mb-10">
+          <div className="grid sm:grid-cols-2 gap-6 mb-10">
             {[
-              "Patient-first personalized care",
-              "Advanced sterilization and hygiene protocols",
-              "Experienced and gentle dental professionals",
-              "Affordable treatment with transparent pricing"
+              { title: "Safe Environment", desc: "100% Female-only studio space." },
+              { title: "Expert Coaching", desc: "Supportive trainers who care." },
+              { title: "Body Positivity", desc: "Focus on wellness and strength." },
+              { title: "Energetic Vibe", desc: "Every session is a celebration." }
             ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-sky-100 text-brand-blue rounded-full flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-4 h-4" />
+              <div key={i} className="flex flex-col gap-1">
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 bg-rose-100 text-brand-pink rounded-full flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-3 h-3" />
+                  </div>
+                  <h4 className="font-bold text-brand-black">{item.title}</h4>
                 </div>
-                <span className="text-slate-700 font-medium">{item}</span>
+                <p className="text-sm text-slate-500 ml-7">{item.desc}</p>
               </div>
             ))}
           </div>
-          <a href="#services" className="btn-premium btn-primary">
-            Explore Services
+          <a href="#programs" className="btn-premium btn-primary">
+            Explore Programs
           </a>
         </motion.div>
       </div>
@@ -261,68 +246,48 @@ const About = () => {
   );
 };
 
-const Services = () => {
-  const services = [
-    {
-      icon: <Smile className="w-8 h-8" />,
-      title: "Teeth Cleaning",
-      desc: "Comprehensive prophylaxis to remove plaque, tartar, and surface stains."
-    },
-    {
-      icon: <Stethoscope className="w-8 h-8" />,
-      title: "Root Canal",
-      desc: "Painless laser-assisted root canal treatments to save your natural teeth."
-    },
-    {
-      icon: <ShieldCheck className="w-8 h-8" />,
-      title: "Dental Implants",
-      desc: "Permanent and durable tooth replacement solutions with a natural look."
-    },
-    {
-      icon: <Award className="w-8 h-8" />,
-      title: "Braces & Aligners",
-      desc: "Orthodontic solutions including invisible aligners for a straighter smile."
-    },
-    {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: "Smile Makeover",
-      desc: "Customized cosmetic plans to enhance the aesthetic appearance of your smile."
-    },
-    {
-      icon: <Baby className="w-8 h-8" />,
-      title: "Kids Dentistry",
-      desc: "Shedding the fear of dentists with kid-friendly treatments and games."
-    }
+const Programs = () => {
+  const programs = [
+    { icon: <Zap className="w-8 h-8" />, title: "HIIT Training", desc: "High-intensity intervals for maximum fat burn and endurance." },
+    { icon: <Music className="w-8 h-8" />, title: "Zumba Classes", desc: "Dance your way to fitness with high-energy Latin rhythms." },
+    { icon: <Flower2 className="w-8 h-8" />, title: "Yoga Sessions", desc: "Find balance and flexibility with our guided yoga flows." },
+    { icon: <Dumbbell className="w-8 h-8" />, title: "Weight Training", desc: "Build functional strength with female-focused lifting plans." },
+    { icon: <Users2 className="w-8 h-8" />, title: "Dance Fitness", desc: "Fun, upbeat choreography to keep you moving and smiling." },
+    { icon: <Zap className="w-8 h-8" />, title: "Power Garba", desc: "A unique fusion of fitness and tradition for full-body tone." },
+    { icon: <Wind className="w-8 h-8" />, title: "Pilates", desc: "Core-strengthening movements for a lean and balanced physique." },
+    { icon: <Users className="w-8 h-8" />, title: "Personal Training", desc: "1-on-1 attention tailored to your specific fitness goals." },
+    { icon: <Apple className="w-8 h-8" />, title: "Nutrition Coaching", desc: "Expert guidance for sustainable healthy eating habits." },
+    { icon: <Video className="w-8 h-8" />, title: "Virtual Classes", desc: "Join our community from the comfort of your own home." }
   ];
 
   return (
-    <section id="services" className="py-24 px-6 bg-slate-50">
+    <section id="programs" className="py-24 px-6 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="section-subtitle">Expertise</span>
-          <h2 className="section-title">Specialized <span className="text-brand-blue">Treatments</span></h2>
-          <p className="text-slate-500 max-w-2xl mx-auto">From routine checkups to complex cosmetic surgeries, we offer a full range of modern dental services.</p>
+          <span className="section-subtitle">Our Expertise</span>
+          <h2 className="section-title">Premium <span className="text-brand-pink">Fitness Programs</span></h2>
+          <p className="text-slate-500 max-w-2xl mx-auto">Diverse classes and specialized training designed to keep you motivated and seeing results.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((s, i) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          {programs.map((p, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.05 }}
               whileHover={{ y: -10 }}
-              className="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 group hover:shadow-xl transition-all"
+              className="bg-white p-8 rounded-3xl shadow-sm border border-rose-50 group hover:shadow-xl hover:shadow-rose-100/50 transition-all text-center"
             >
-              <div className="w-16 h-16 bg-sky-50 text-brand-blue rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-blue group-hover:text-white transition-colors">
-                {s.icon}
+              <div className="w-16 h-16 bg-rose-50 text-brand-pink rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:bg-brand-pink group-hover:text-white transition-colors">
+                {p.icon}
               </div>
-              <h3 className="text-xl font-bold text-brand-navy mb-4">{s.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">
-                {s.desc}
+              <h3 className="text-lg font-bold text-brand-black mb-3">{p.title}</h3>
+              <p className="text-slate-500 text-xs leading-relaxed mb-6">
+                {p.desc}
               </p>
-              <button className="text-brand-blue font-bold text-xs uppercase tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
-                Learn More <ChevronRight className="w-4 h-4" />
+              <button className="text-brand-pink font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 mx-auto group-hover:gap-3 transition-all">
+                Learn More <ChevronRight className="w-3 h-3" />
               </button>
             </motion.div>
           ))}
@@ -332,35 +297,35 @@ const Services = () => {
   );
 };
 
-const WhyChooseUs = () => {
-  const features = [
-    { icon: <Users />, title: "Experienced Doctors", desc: "Highly qualified dental surgeons with years of expertise." },
-    { icon: <Sparkles />, title: "Modern Equipment", desc: "Equipped with the latest digital dental technologies." },
-    { icon: <Heart />, title: "Comfortable Clinic", desc: "A soothing atmosphere designed for patient relaxation." },
-    { icon: <ShieldCheck />, title: "Hygienic Environment", desc: "Strict 7-step sterilization following international standards." }
+const WhyWomenLoveUs = () => {
+  const reasons = [
+    { icon: <Heart className="w-6 h-6" />, title: "Safe & Private", desc: "Fully exclusive female environment." },
+    { icon: <Users2 className="w-6 h-6" />, title: "Fun Community", desc: "Make supportive friends for life." },
+    { icon: <Award className="w-6 h-6" />, title: "Pro Equipment", desc: "State-of-the-art modern gym tools." },
+    { icon: <Clock className="w-6 h-6" />, title: "Flexible Timing", desc: "Batches that fit your busy schedule." }
   ];
 
   return (
-    <section id="why-choose-us" className="py-24 px-6 bg-brand-navy text-white relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
+    <section className="py-24 px-6 bg-brand-black text-white relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-pink/5 blur-[120px] rounded-full" />
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
         >
-          <span className="section-subtitle !text-brand-blue">Excellence</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-8 leading-tight">Why Patients Trust <br /><span className="text-brand-blue">Affection Dental</span></h2>
+          <span className="section-subtitle !text-brand-pink">The Difference</span>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">Why Women Love <br /><span className="text-brand-pink">Fitjiyo Fitness</span></h2>
           <p className="text-slate-400 mb-12 text-lg">
-            We focus on outcome-based dentistry. Our goal isn't just to fix a problem, but to ensure long-term oral health and patient satisfaction.
+            We focus on more than just physical changes. We build confidence, strength, and a positive mindset within a thriving community of women.
           </p>
           <div className="grid sm:grid-cols-2 gap-8">
-            {features.map((f, i) => (
+            {reasons.map((r, i) => (
               <div key={i} className="space-y-3">
-                <div className="w-12 h-12 bg-brand-blue/10 text-brand-blue rounded-xl flex items-center justify-center">
-                  {f.icon}
+                <div className="w-12 h-12 bg-brand-pink/20 text-brand-pink rounded-xl flex items-center justify-center">
+                  {r.icon}
                 </div>
-                <h4 className="font-bold text-lg">{f.title}</h4>
-                <p className="text-slate-500 text-sm">{f.desc}</p>
+                <h4 className="font-bold text-lg">{r.title}</h4>
+                <p className="text-slate-500 text-sm leading-relaxed">{r.desc}</p>
               </div>
             ))}
           </div>
@@ -371,20 +336,20 @@ const WhyChooseUs = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           className="relative"
         >
-          <div className="relative rounded-[40px] overflow-hidden">
+          <div className="relative rounded-[3rem] overflow-hidden border-8 border-white/5 shadow-2xl">
             <img 
-              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1000&auto=format&fit=crop" 
-              alt="Doctor Training" 
-              className="w-full grayscale contrast-125"
+              src="https://images.unsplash.com/photo-1574680077505-ef7da635eaa3?q=80&w=1000&auto=format&fit=crop" 
+              alt="Community workout" 
+              className="w-full h-auto"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-brand-blue/20 mix-blend-overlay" />
+            <div className="absolute inset-0 bg-brand-pink/10 mix-blend-overlay" />
           </div>
-          <div className="absolute -bottom-10 -right-10 hidden xl:block">
-             <div className="bg-white text-brand-navy p-10 rounded-3xl shadow-2xl">
-                <div className="flex items-center gap-4">
-                   <div className="text-4xl font-extrabold text-brand-blue">98%</div>
-                   <div className="text-[10px] uppercase font-bold tracking-widest leading-tight">Patient <br />Satisfaction</div>
+          <div className="absolute -bottom-6 lg:-bottom-12 -left-6 lg:-left-12">
+             <div className="bg-brand-pink p-8 py-10 rounded-[2rem] shadow-2xl">
+                <div className="flex items-center gap-4 text-white">
+                   <div className="text-5xl font-black italic">4.9/5</div>
+                   <div className="text-[10px] uppercase font-bold tracking-widest leading-tight">Google Store <br />Satisfaction</div>
                 </div>
              </div>
           </div>
@@ -394,34 +359,38 @@ const WhyChooseUs = () => {
   );
 };
 
-const Gallery = () => {
-  const images = [
-    "https://images.unsplash.com/photo-1597764690523-15bea4c581c9?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1445527815219-ecbfec67492e?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop"
+const Schedule = () => {
+  const sessions = [
+    { time: "06:00 AM - 10:00 AM", title: "Morning Energy", days: "Mon - Sat", type: "Multiple Classes" },
+    { time: "11:00 AM - 01:00 PM", title: "Ladies Special", days: "Mon - Fri", type: "Yoga & Pilates" },
+    { time: "04:00 PM - 08:30 PM", title: "Evening Power", days: "Mon - Sat", type: "HIIT & Zumba" },
+    { time: "08:00 AM - 12:00 PM", title: "Weekend Blast", days: "Sun", type: "Special Workshops" }
   ];
 
   return (
-    <section id="gallery" className="py-24 px-6 bg-white overflow-hidden">
+    <section id="schedule" className="py-24 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="section-subtitle">Our Home</span>
-          <h2 className="section-title">The <span className="text-brand-blue">Clinic</span> Experience</h2>
+          <span className="section-subtitle">Timetables</span>
+          <h2 className="section-title">Find Your <span className="text-brand-pink">Perfect Slot</span></h2>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {images.map((img, i) => (
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {sessions.map((s, i) => (
             <motion.div
               key={i}
-              whileHover={{ scale: 1.05 }}
-              className="aspect-square rounded-2xl overflow-hidden shadow-lg"
+              whileHover={{ y: -5 }}
+              className="p-8 rounded-[2rem] bg-rose-50/50 border border-rose-100 flex flex-col items-center text-center"
             >
-              <img 
-                src={img} 
-                alt="Clinic Interior" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" 
-                referrerPolicy="no-referrer"
-              />
+              <div className="w-12 h-12 bg-white text-brand-pink rounded-full flex items-center justify-center shadow-sm mb-6">
+                <Clock className="w-6 h-6" />
+              </div>
+              <h4 className="text-xl font-extrabold text-brand-black mb-1">{s.title}</h4>
+              <p className="text-brand-pink font-bold text-sm mb-4">{s.time}</p>
+              <div className="mt-auto pt-6 border-t border-rose-100 w-full">
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">{s.days}</p>
+                <p className="text-[10px] text-slate-400 font-medium">{s.type}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -430,47 +399,121 @@ const Gallery = () => {
   );
 };
 
-const Reviews = () => {
-  const reviews = [
-    { name: "Rahul Deshmukh", text: "Truly the best dental experience I've had. The doctor was very patient and explained everything clearly. Painless root canal!", stars: 5 },
-    { name: "Sneha Patel", text: "Taking my kids to a dentist used to be a nightmare until we found Affection Dental. The staff is so friendly and good with children.", stars: 5 },
-    { name: "Amit Shah", text: "Cleanest clinic in Fatehgunj. Very professional and the equipments are high tech. Highly recommend for implants.", stars: 5 }
+const Transformations = () => {
+  const stories = [
+    { label: "Weight Loss", value: "-12kg", time: "3 Months", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=600&auto=format&fit=crop" },
+    { label: "Strength", value: "Muscle Tone", time: "6 Months", image: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=600&auto=format&fit=crop" },
+    { label: "Flexibility", value: "+40%", time: "4 Months", image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=600&auto=format&fit=crop" }
   ];
 
   return (
-    <section id="reviews" className="py-24 px-6 bg-slate-50">
+    <section id="transformations" className="py-24 px-6 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-1 mb-4">
-            {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-orange-400 fill-orange-400" />)}
-          </div>
-          <h2 className="section-title">What Our <span className="text-brand-blue">Patients Say</span></h2>
-          <p className="text-slate-500">4.8 Average Rating • 1,000+ Reviews Across Platforms</p>
+          <span className="section-subtitle">Real Results</span>
+          <h2 className="section-title">Empowerment <span className="text-brand-pink">Stories</span></h2>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {stories.map((s, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="group relative overflow-hidden rounded-[2.5rem] bg-white shadow-xl aspect-[4/5]"
+            >
+              <img 
+                src={s.image} 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                alt="Transformation"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+              <div className="absolute bottom-10 left-10 right-10 text-white">
+                <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-brand-pink mb-2 block">{s.label}</span>
+                <h3 className="text-3xl font-black italic">{s.value}</h3>
+                <p className="text-sm font-medium text-white/70 mt-2">Achieved in {s.time}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Testimonials = () => {
+  const reviews = [
+    { name: "Sunita M.", text: "Initially, I was intimidated by the gym, but Fitjiyo changed that. It’s more than just a workout; it’s where I found my confidence again.", stars: 5 },
+    { name: "Riya Patel", text: "The personal attention here is unmatched. It feels like a boutique experience where every trainer knows your name and your goals.", stars: 5 },
+    { name: "Karishma G.", text: "I love that I can just be myself here. No judgment, just pure energy and a community of incredible women pushing each other.", stars: 5 }
+  ];
+
+  return (
+    <section className="py-24 px-6 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="section-title">What Our <span className="text-brand-pink">Members Feel</span></h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {reviews.map((r, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm relative"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              className="glass-card p-10 rounded-[2.5rem] relative group overflow-hidden"
             >
-              <div className="absolute top-10 right-10 text-slate-100 text-6xl font-serif">“</div>
+              <div className="absolute top-0 left-0 w-2 h-full bg-brand-pink group-hover:w-full group-hover:opacity-5 transition-all duration-500" />
               <div className="flex gap-1 mb-6">
                  {[...Array(r.stars)].map((_, j) => <Star key={j} className="w-3 h-3 text-orange-400 fill-orange-400" />)}
               </div>
-              <p className="text-slate-600 mb-8 italic leading-relaxed relative z-10">"{r.text}"</p>
-              <div className="flex items-center gap-4 border-t border-slate-50 pt-6">
-                <div className="w-10 h-10 rounded-full bg-sky-100 text-brand-blue flex items-center justify-center font-bold text-xs">
+              <p className="text-slate-600 mb-8 italic leading-relaxed text-lg">"{r.text}"</p>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-rose-100 text-brand-pink flex items-center justify-center font-bold text-sm">
                   {r.name.charAt(0)}
                 </div>
                 <div>
-                   <h5 className="font-bold text-sm text-brand-navy leading-none">{r.name}</h5>
-                   <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest mt-1">Verified Patient</p>
+                   <h5 className="font-bold text-brand-black">{r.name}</h5>
+                   <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">Happy Member</p>
                 </div>
               </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Gallery = () => {
+  const images = [
+    "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1599058917232-d750c1827092?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1549576490-b0b4831da60a?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop"
+  ];
+
+  return (
+    <section className="py-24 px-6 bg-slate-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="section-subtitle">Life at Fitjiyo</span>
+          <h2 className="section-title">The <span className="text-brand-pink">Studio</span> Gallery</h2>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {images.map((img, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="aspect-square rounded-3xl overflow-hidden shadow-lg"
+            >
+              <img 
+                src={img} 
+                alt="Studio activity" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+                referrerPolicy="no-referrer"
+              />
             </motion.div>
           ))}
         </div>
@@ -488,42 +531,41 @@ const Contact = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
           >
-            <span className="section-subtitle">Get In Touch</span>
-            <h2 className="section-title">Schedule Your <span className="text-brand-blue">Smile Consult</span></h2>
-            <p className="text-slate-500 mb-10">Fill out the form below and our team will get back to you within 2 business hours for confirmation.</p>
+            <span className="section-subtitle">Contact Us</span>
+            <h2 className="section-title">Start Your <span className="text-brand-pink">Transformation</span></h2>
+            <p className="text-slate-500 mb-10 text-lg">Claim your free trial session today. Our team will reach out to you within 30 minutes to confirm your slot.</p>
             
             <form className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Full Name</label>
-                  <input type="text" className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Phone Number</label>
-                  <input type="tel" className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all" />
-                </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-brand-black uppercase tracking-widest">Full Name</label>
+                <input type="text" placeholder="Your Name" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-pink outline-none transition-all placeholder:text-slate-300" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold text-brand-black uppercase tracking-widest">Phone Number</label>
+                <input type="tel" placeholder="+91" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-pink outline-none transition-all placeholder:text-slate-300" />
               </div>
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Treatment Type</label>
-                  <select className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all appearance-none">
-                    <option>Teeth Cleaning</option>
-                    <option>Root Canal</option>
-                    <option>Dental Implants</option>
-                    <option>Checkup</option>
+                  <label className="text-xs font-bold text-brand-black uppercase tracking-widest">Interest</label>
+                  <select className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-pink outline-none transition-all appearance-none">
+                    <option>Free Trial Class</option>
+                    <option>Zumba Classes</option>
+                    <option>Weight Training</option>
+                    <option>HIIT Sessions</option>
+                    <option>Yoga Sessions</option>
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Preferred Date</label>
-                  <input type="date" className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all" />
+                  <label className="text-xs font-bold text-brand-black uppercase tracking-widest">Preffered Time</label>
+                  <select className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-pink outline-none transition-all appearance-none">
+                    <option>Morning Batches</option>
+                    <option>Ladies Noon Batch</option>
+                    <option>Evening Batches</option>
+                  </select>
                 </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-brand-navy uppercase tracking-widest">Message</label>
-                <textarea rows={4} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:border-brand-blue outline-none transition-all" />
-              </div>
-              <button className="btn-premium btn-primary w-full py-5">
-                Request Appointment
+              <button className="btn-premium btn-primary w-full py-5 text-base rounded-[1.5rem]">
+                Claim Free Trial Now
               </button>
             </form>
           </motion.div>
@@ -533,32 +575,35 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             className="flex flex-col gap-8"
           >
-            <div className="h-[400px] rounded-[40px] overflow-hidden border-8 border-slate-50 shadow-xl grayscale hover:grayscale-0 transition-all duration-700">
+            <div className="flex-1 bg-slate-50 rounded-[3rem] p-8 border border-rose-100 overflow-hidden relative min-h-[400px]">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.669!2d73.190!3d22.330!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fcf46c2f9d5ef%3A0xe543df65d836269b!2sAffection%20Dental%20Care!5e0!3m2!1sen!2sin!4v1716100000000!5m2!1sen!2sin" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3690.669!2d73.190!3d22.330!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fcf46c2f9d5ef%3A0xe543df65d836269b!2sKarelibagh%2C%20Vadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1716100000000!5m2!1sen!2sin" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
                 allowFullScreen="" 
                 loading="lazy" 
+                className="absolute inset-0 grayscale contrast-125 opacity-70"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
+              <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent pointer-events-none" />
             </div>
             
-            <div className="grid sm:grid-cols-2 gap-8">
-               <div className="glass-card p-6 rounded-3xl">
-                  <div className="w-10 h-10 bg-sky-50 text-brand-blue rounded-xl flex items-center justify-center mb-4">
+            <div className="grid sm:grid-cols-2 gap-6">
+               <div className="glass-card p-8 rounded-[2rem]">
+                  <div className="w-10 h-10 bg-rose-50 text-brand-pink rounded-xl flex items-center justify-center mb-4">
                     <MapPin className="w-5 h-5" />
                   </div>
-                  <h4 className="font-bold text-brand-navy uppercase text-[10px] tracking-widest mb-1">Our Location</h4>
-                  <p className="text-xs text-slate-500 leading-relaxed">GF 21, Saffron Complex, Fategunj, Vadodara, 390008</p>
+                  <h4 className="font-extrabold text-brand-black uppercase text-[10px] tracking-widest mb-2">Our Location</h4>
+                  <p className="text-xs text-slate-500 leading-relaxed font-medium">Sardar Chatralay, Patel Marg, Opp. Krishna Beauty Clinic, Karelibagh, Vadodara</p>
                </div>
-               <div className="glass-card p-6 rounded-3xl">
-                  <div className="w-10 h-10 bg-sky-50 text-brand-blue rounded-xl flex items-center justify-center mb-4">
+               <div className="glass-card p-8 rounded-[2rem]">
+                  <div className="w-10 h-10 bg-rose-50 text-brand-pink rounded-xl flex items-center justify-center mb-4">
                     <Phone className="w-5 h-5" />
                   </div>
-                  <h4 className="font-bold text-brand-navy uppercase text-[10px] tracking-widest mb-1">Call Us</h4>
-                  <p className="text-xs text-slate-500 leading-relaxed">+91 96870 56003</p>
+                  <h4 className="font-extrabold text-brand-black uppercase text-[10px] tracking-widest mb-2">Contact</h4>
+                  <p className="text-xs text-slate-500 leading-relaxed font-bold">+91 91060 21677</p>
+                  <p className="text-xs text-slate-400 mt-1">info@fitjiyo.com</p>
                </div>
             </div>
           </motion.div>
@@ -571,12 +616,12 @@ const Contact = () => {
 const WhatsAppButton = () => {
   return (
     <motion.a 
-      href="https://wa.me/919687056003"
+      href="https://wa.me/919106021677"
       target="_blank"
       rel="noreferrer"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-8 right-8 z-[60] bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center shadow-green-200"
+      className="fixed bottom-8 right-8 z-[60] bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center"
     >
       <MessageCircle className="w-8 h-8 fill-white/20" />
     </motion.a>
@@ -585,29 +630,29 @@ const WhatsAppButton = () => {
 
 const Footer = () => {
   return (
-    <footer className="py-20 px-6 bg-slate-50 border-t border-slate-100">
+    <footer className="py-20 px-6 bg-soft-pink">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-12 mb-20">
-          <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-brand-blue rounded-lg flex items-center justify-center">
-                <Heart className="text-white w-5 h-5 fill-white/20" />
+          <div className="col-span-1 md:col-span-1 text-center md:text-left">
+            <div className="flex items-center gap-2 mb-6 justify-center md:justify-start">
+              <div className="w-10 h-10 bg-brand-pink rounded-xl flex items-center justify-center">
+                <Zap className="text-white w-6 h-6 fill-white/20" />
               </div>
-              <div className="flex flex-col">
-                <span className="font-heading font-extrabold text-lg leading-none text-brand-navy">
-                  Affection
+              <div className="flex flex-col text-left">
+                <span className="font-heading font-extrabold text-2xl leading-none text-brand-black">
+                  FITJIYO
                 </span>
-                <span className="text-[8px] uppercase font-bold tracking-[0.2em] text-brand-blue mt-1">
-                  Dental Care
+                <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-brand-pink mt-1">
+                  FITNESS
                 </span>
               </div>
             </div>
             <p className="text-slate-500 text-sm leading-relaxed mb-8">
-              Providing premium dentistry with a patient-first approach. Focused on hygiene, comfort, and results.
+              Vadodara's most loved female-exclusive fitness studio. Empowering women through science-backed training and community spirit.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center md:justify-start">
               {[Instagram, Facebook, Twitter].map((Icon, idx) => (
-                <a key={idx} href="#" className="w-10 h-10 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-brand-blue hover:border-brand-blue transition-all">
+                <a key={idx} href="#" className="w-10 h-10 bg-white border border-rose-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-brand-pink hover:border-brand-pink transition-all">
                   <Icon className="w-5 h-5" />
                 </a>
               ))}
@@ -615,48 +660,49 @@ const Footer = () => {
           </div>
 
           <div>
-             <h5 className="font-extrabold text-brand-navy mb-6 uppercase text-xs tracking-widest">Clinic Info</h5>
-             <ul className="space-y-4 text-sm text-slate-500 font-medium">
-               <li className="flex gap-3"><Clock className="w-4 h-4 text-brand-blue shrink-0" /> Mon - Sat: 9AM - 8PM</li>
-               <li className="flex gap-3"><MapPin className="w-4 h-4 text-brand-blue shrink-0" /> Saffron Shopping Center, Fatehgunj</li>
-               <li className="flex gap-3"><Phone className="w-4 h-4 text-brand-blue shrink-0" /> +91 96870 56003</li>
+             <h5 className="font-extrabold text-brand-black mb-6 uppercase text-xs tracking-widest text-center md:text-left">Working Hours</h5>
+             <ul className="space-y-4 text-sm text-slate-500 font-medium text-center md:text-left">
+               <li className="flex gap-3 justify-center md:justify-start"><Clock className="w-4 h-4 text-brand-pink shrink-0" /> Mon - Sat: 06:00 AM - 08:30 PM</li>
+               <li className="flex gap-3 justify-center md:justify-start"><Clock className="w-4 h-4 text-brand-pink shrink-0" /> Sun: Morning Special Batches</li>
+               <li className="flex gap-3 justify-center md:justify-start"><MapPin className="w-4 h-4 text-brand-pink shrink-0" /> Karelibagh, Vadodara</li>
              </ul>
           </div>
 
           <div>
-             <h5 className="font-extrabold text-brand-navy mb-6 uppercase text-xs tracking-widest">Quick Links</h5>
-             <ul className="grid grid-cols-2 gap-4 text-sm text-slate-500 font-medium">
-               <li><a href="#about" className="hover:text-brand-blue">About</a></li>
-               <li><a href="#services" className="hover:text-brand-blue">Services</a></li>
-               <li><a href="#gallery" className="hover:text-brand-blue">Gallery</a></li>
-               <li><a href="#reviews" className="hover:text-brand-blue">Reviews</a></li>
-               <li><a href="#contact" className="hover:text-brand-blue">Contact</a></li>
-               <li><a href="#" className="hover:text-brand-blue">FAQ</a></li>
+             <h5 className="font-extrabold text-brand-black mb-6 uppercase text-xs tracking-widest text-center md:text-left">Programs</h5>
+             <ul className="grid grid-cols-2 gap-4 text-sm text-slate-500 font-medium text-center md:text-left">
+               <li><a href="#" className="hover:text-brand-pink">HIIT Class</a></li>
+               <li><a href="#" className="hover:text-brand-pink">Zumba</a></li>
+               <li><a href="#" className="hover:text-brand-pink">Yoga</a></li>
+               <li><a href="#" className="hover:text-brand-pink">Pilates</a></li>
+               <li><a href="#" className="hover:text-brand-pink">Weight Loss</a></li>
+               <li><a href="#" className="hover:text-brand-pink">Garba Gym</a></li>
              </ul>
           </div>
 
           <div>
-            <h5 className="font-extrabold text-brand-navy mb-6 uppercase text-xs tracking-widest">Our Mission</h5>
-            <div className="bg-white p-6 rounded-3xl border border-slate-100">
-               <p className="text-xs text-slate-500 italic leading-loose">
-                 "To provide the highest standard of oral healthcare in a caring and empathetic manner, making dental visits something patients look forward to."
+            <h5 className="font-extrabold text-brand-black mb-6 uppercase text-xs tracking-widest text-center md:text-left">Inspiration</h5>
+            <div className="bg-white p-8 rounded-[2rem] border border-rose-100 relative">
+               <div className="absolute -top-3 left-8 text-6xl text-rose-100 font-serif leading-none italic select-none">“</div>
+               <p className="text-xs text-slate-500 italic leading-loose relative z-10 text-center md:text-left">
+                 "True strength is the journey of becoming who you were always meant to be, in a space that respects your pace."
                </p>
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-200/50 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="pt-8 border-t border-rose-200/30 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-            © 2026 Affection Dental Care. All Rights Reserved.
+            © 2026 Fitjiyo Fitness. Vadodara's Female-Only Studio.
           </p>
           <div className="flex items-center gap-4">
-             <div className="flex items-center gap-1 text-sky-600">
+             <div className="flex items-center gap-1 text-slate-400">
                 <ShieldCheck className="w-4 h-4" />
-                <span className="text-[10px] font-bold uppercase tracking-widest">Hygienic Safe</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest">Safe Space</span>
              </div>
-             <div className="flex items-center gap-1 text-sky-600">
+             <div className="flex items-center gap-1 text-slate-400">
                 <Award className="w-4 h-4" />
-                <span className="text-[10px] font-bold uppercase tracking-widest">Certified</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest">Top Rated</span>
              </div>
           </div>
         </div>
@@ -667,71 +713,64 @@ const Footer = () => {
 
 export default function App() {
   return (
-    <div className="relative overflow-x-hidden selection:bg-brand-blue selection:text-white">
+    <div className="selection:bg-brand-pink selection:text-white bg-white">
       <Navbar />
       <Hero />
       <About />
-      <Services />
+      <Programs />
       
-      {/* Banner Stats */}
-      <section className="py-20 bg-brand-blue">
-         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center text-white">
+      {/* Visual Stat Banner */}
+      <section className="py-20 bg-brand-pink">
+         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center text-white">
             <div>
-               <div className="text-4xl font-extrabold mb-2 underline decoration-white/20">4.8</div>
-               <div className="text-[10px] uppercase font-black tracking-widest opacity-80">Google Rating</div>
+               <div className="text-5xl font-black mb-1">4.9</div>
+               <div className="text-[10px] uppercase font-bold tracking-[0.3em] opacity-80">Google Rating</div>
             </div>
             <div>
-               <div className="text-4xl font-extrabold mb-2 underline decoration-white/20">10+</div>
-               <div className="text-[10px] uppercase font-black tracking-widest opacity-80">Years Exp.</div>
+               <div className="text-5xl font-black mb-1">87+</div>
+               <div className="text-[10px] uppercase font-bold tracking-[0.3em] opacity-80">Real Reviews</div>
             </div>
             <div>
-               <div className="text-4xl font-extrabold mb-2 underline decoration-white/20">24/7</div>
-               <div className="text-[10px] uppercase font-black tracking-widest opacity-80">Emergency Care</div>
+               <div className="text-5xl font-black mb-1">100%</div>
+               <div className="text-[10px] uppercase font-bold tracking-[0.3em] opacity-80">Female Only</div>
             </div>
             <div>
-               <div className="text-4xl font-extrabold mb-2 underline decoration-white/20">1k+</div>
-               <div className="text-[10px] uppercase font-black tracking-widest opacity-80">Smiles Made</div>
+               <div className="text-5xl font-black mb-1">500+</div>
+               <div className="text-[10px] uppercase font-bold tracking-[0.3em] opacity-80">Active Members</div>
             </div>
          </div>
       </section>
 
-      <WhyChooseUs />
-      <Gallery />
-      <Reviews />
-
-      {/* Floating Section CTA */}
-      <section className="py-24 px-6 bg-slate-50">
-        <div className="max-w-5xl mx-auto bg-brand-blue rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-sky-200">
-           <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%)] bg-[length:200%_200%] animate-[shimmer_5s_infinite_linear]" />
-           <motion.div
-             initial={{ opacity: 0, scale: 0.95 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             className="relative z-10"
-           >
-              <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-8">Ready For A <span className="underline decoration-white/30">Lighter Smile?</span></h2>
-              <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
-                Join our patient family today. Book your consultation and experience the difference at Affection Dental Care.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                 <a href="#contact" className="px-10 py-5 bg-white text-brand-blue font-extrabold rounded-full hover:scale-105 transition-all shadow-xl">Book Free Consultation</a>
-                 <a href="https://wa.me/919687056003" className="px-10 py-5 bg-brand-navy text-white font-extrabold rounded-full hover:scale-105 transition-all flex items-center justify-center gap-2">
-                    WhatsApp Us <ArrowRight className="w-4 h-4 text-brand-blue" />
-                 </a>
-              </div>
-           </motion.div>
-        </div>
+      <WhyWomenLoveUs />
+      <Schedule />
+      <Transformations />
+      
+      <section className="py-24 px-6 bg-soft-pink">
+         <div className="max-w-6xl mx-auto bg-brand-black rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-pink/20 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="relative z-10"
+            >
+               <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-8">Ready to Start Your <br /><span className="text-brand-pink italic">Transformation?</span></h2>
+               <p className="text-white/60 text-lg mb-12 max-w-xl mx-auto">
+                 Don't wait for tomorrow. Your safe, supportive, and energetic fitness community is waiting for you in Karelibagh.
+               </p>
+               <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <a href="#contact" className="btn-premium btn-primary py-5 px-12 text-base shadow-2xl shadow-rose-900/40">Claim Free Trial Session</a>
+                  <a href="https://wa.me/919106021677" className="btn-premium bg-white text-brand-black hover:bg-slate-50 py-5 px-12 text-base">
+                    Contact via WhatsApp
+                  </a>
+               </div>
+            </motion.div>
+         </div>
       </section>
 
+      <Testimonials />
+      <Gallery />
       <Contact />
       <Footer />
-      <WhatsAppButton />
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes shimmer {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-      `}} />
     </div>
   );
 }
