@@ -297,7 +297,7 @@ const Programs = () => {
   );
 };
 
-const WhyWomenLoveUs = () => {
+const WhyChooseUs = () => {
   const reasons = [
     { icon: <Heart className="w-6 h-6" />, title: "Safe & Private", desc: "Fully exclusive female environment." },
     { icon: <Users2 className="w-6 h-6" />, title: "Fun Community", desc: "Make supportive friends for life." },
@@ -306,7 +306,7 @@ const WhyWomenLoveUs = () => {
   ];
 
   return (
-    <section className="py-24 px-6 bg-brand-black text-white relative overflow-hidden">
+    <section id="why-us" className="py-24 px-6 bg-brand-black text-white relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-pink/5 blur-[120px] rounded-full" />
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <motion.div
@@ -314,7 +314,7 @@ const WhyWomenLoveUs = () => {
           whileInView={{ opacity: 1, x: 0 }}
         >
           <span className="section-subtitle !text-brand-pink">The Difference</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">Why Women Love <br /><span className="text-brand-pink">Fitjiyo Fitness</span></h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">Why Choose <br /><span className="text-brand-pink">Fitjiyo Fitness</span></h2>
           <p className="text-slate-400 mb-12 text-lg">
             We focus on more than just physical changes. We build confidence, strength, and a positive mindset within a thriving community of women.
           </p>
@@ -401,9 +401,9 @@ const Schedule = () => {
 
 const Transformations = () => {
   const stories = [
-    { label: "Weight Loss", value: "-12kg", time: "3 Months", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=600&auto=format&fit=crop" },
-    { label: "Strength", value: "Muscle Tone", time: "6 Months", image: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=600&auto=format&fit=crop" },
-    { label: "Flexibility", value: "+40%", time: "4 Months", image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=600&auto=format&fit=crop" }
+    { label: "Strength", value: "Muscle Tone", time: "3 Months", image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?q=80&w=600&auto=format&fit=crop" },
+    { label: "Wellness", value: "Weight Loss", time: "5 Months", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=600&auto=format&fit=crop" },
+    { label: "Endurance", value: "Stamina", time: "4 Months", image: "https://images.unsplash.com/photo-1549576490-b0b4831da60a?q=80&w=600&auto=format&fit=crop" }
   ];
 
   return (
@@ -488,10 +488,10 @@ const Testimonials = () => {
 
 const Gallery = () => {
   const images = [
-    "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1599058917232-d750c1827092?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1549576490-b0b4831da60a?q=80&w=800&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop"
+    "https://images.unsplash.com/photo-1518611012118-2969c63b002f?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1596715949111-0fa36d140645?q=80&w=800&auto=format&fit=crop"
   ];
 
   return (
@@ -506,12 +506,12 @@ const Gallery = () => {
             <motion.div
               key={i}
               whileHover={{ scale: 1.05 }}
-              className="aspect-square rounded-3xl overflow-hidden shadow-lg"
+              className="aspect-square rounded-3xl overflow-hidden shadow-lg border border-rose-100"
             >
               <img 
                 src={img} 
                 alt="Studio activity" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+                className="w-full h-full object-cover transition-all duration-700" 
                 referrerPolicy="no-referrer"
               />
             </motion.div>
@@ -681,11 +681,11 @@ const Footer = () => {
           </div>
 
           <div>
-            <h5 className="font-extrabold text-brand-black mb-6 uppercase text-xs tracking-widest text-center md:text-left">Inspiration</h5>
+            <h5 className="font-extrabold text-brand-black mb-6 uppercase text-xs tracking-widest text-center md:text-left">Our Philosophy</h5>
             <div className="bg-white p-8 rounded-[2rem] border border-rose-100 relative">
                <div className="absolute -top-3 left-8 text-6xl text-rose-100 font-serif leading-none italic select-none">“</div>
-               <p className="text-xs text-slate-500 italic leading-loose relative z-10 text-center md:text-left">
-                 "True strength is the journey of becoming who you were always meant to be, in a space that respects your pace."
+               <p className="text-xs text-slate-500 italic leading-loose relative z-10 text-center md:text-left uppercase tracking-wider font-bold">
+                 "WE BELIEVE THAT WHEN A WOMAN UNLOCKS HER STRENGTH, SHE TRANSFORMS NOT JUST HER BODY, BUT HER ENTIRE WORLD."
                </p>
             </div>
           </div>
@@ -741,7 +741,7 @@ export default function App() {
          </div>
       </section>
 
-      <WhyWomenLoveUs />
+      <WhyChooseUs />
       <Schedule />
       <Transformations />
       
